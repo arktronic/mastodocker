@@ -1,0 +1,5 @@
+elasticsearch/
+redis/
+public/
+postgres/
+.env.production
