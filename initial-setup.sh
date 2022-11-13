@@ -17,4 +17,11 @@ sudo chown -R 999 ./redis
 
 [ -f ./.env.production ] || cp ./env.production.example ./.env.production
 
+MAXMAPCT=$(cat /proc/sys/vm/max_map_count)
+[ "$MAXMAPCT" -lt "262144" ] && {
+  echo WARNING: your vm.max_map_count is below 262144. ElasticSearch will not function.
+  echo See https://www.elastic.co/guide/en/elasticsearch/reference/7.17/vm-max-map-count.html
+  exit 1
+}
+
 echo OK
