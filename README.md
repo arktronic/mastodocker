@@ -95,6 +95,8 @@ TBD... theoretically, you should just be able to run `./es-deploy.sh`, but there
 
 TBD
 
+See also: [Running periodic cleanup tasks](https://docs.joinmastodon.org/admin/setup/#cleanup)
+
 ## Updating to a newer version
 
 Zero-downtime updates are possible with Mastodon, but that's out of scope.
