@@ -87,6 +87,10 @@ sudo ln -s ../sites-available/mastodon /etc/nginx/sites-enabled/mastodon
 
 You should be good to go!
 
+## Setting up ElasticSearch
+
+TBD... theoretically, you should just be able to run `./es-deploy.sh`, but there appears to be some [bug if you do it immediately after deployment](https://github.com/mastodon/mastodon/issues/18625).
+
 ## Maintenance
 
 TBD
