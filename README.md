@@ -97,6 +97,8 @@ TBD
 
 See also: [Running periodic cleanup tasks](https://docs.joinmastodon.org/admin/setup/#cleanup)
 
+See also: [Backups](https://docs.joinmastodon.org/admin/backups/), although if running on a hosted VM, backing the whole thing up can be an easy option
+
 ## Updating to a newer version
 
 Zero-downtime updates are possible with Mastodon, but that's out of scope.
