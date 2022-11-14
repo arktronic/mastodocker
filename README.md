@@ -4,6 +4,8 @@ Setting up your own Mastodon instance with Docker Compose and nginx
 
 ### _WARNING: This is an experimental repo and guide. Things may not work correctly. You might lose all of your data. YMMV._
 
+See also: https://github.com/arktronic/mastodon-docker-patch
+
 ## Prerequisites
 
 You will need the following:
