@@ -2,4 +2,6 @@ elasticsearch/
 redis/
 public/
 postgres/
+nginx-data/
+.env
 .env.production

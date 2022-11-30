@@ -3,17 +3,25 @@
 set -e
 cd -- "$( dirname -- "${BASH_SOURCE[0]}" )"
 
-mkdir -p ./public/system
-sudo chown -R 991:991 ./public
+source .env || {
+  echo ERROR: You do not have a .env file.
+  echo Please copy "env.example" to ".env" and make any necessary changes to it first.
+  exit 1
+}
 
-mkdir -p ./elasticsearch
-sudo chown -R 1000:1000 ./elasticsearch
+sudo mkdir -p $MASTODON_DATA_LOCATION
+sudo chown -R 991:991 $MASTODON_DATA_LOCATION
 
-mkdir -p ./postgres
-sudo chown -R 70:70 ./postgres
+sudo mkdir -p $ELASTICSEARCH_DATA_LOCATION
+sudo chown -R 1000:1000 $ELASTICSEARCH_DATA_LOCATION
 
-mkdir -p ./redis
-sudo chown -R 999 ./redis
+sudo mkdir -p $POSTGRES_DATA_LOCATION
+sudo chown -R 70:70 $POSTGRES_DATA_LOCATION
+
+sudo mkdir -p $REDIS_DATA_LOCATION
+sudo chown -R 999 $REDIS_DATA_LOCATION
+
+sudo mkdir -p $NGINX_DATA_LOCATION
 
 [ -f ./.env.production ] || cp ./env.production.example ./.env.production
 
