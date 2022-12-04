@@ -8,3 +8,12 @@ scrape_configs:
 - job_name: mastodon
   static_configs:
   - targets: ['promstatsdexporter:9102']
+- job_name: nginx
+  static_configs:
+  - targets: ['promnginxexporter:9113']
+- job_name: postgres
+  static_configs:
+  - targets: ['prompostgresexporter:9187']
+- job_name: redis
+  static_configs:
+  - targets: ['promredisexporter:9121']

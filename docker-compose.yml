@@ -13,6 +13,7 @@ services:
       - ${POSTGRES_DATA_LOCATION}:/var/lib/postgresql/data
     environment:
       - 'POSTGRES_HOST_AUTH_METHOD=trust'
+      - 'POSTGRES_PASSWORD=pgPasswordForInternalUseOnly243247-t'
 
   redis:
     image: redis:7-alpine
@@ -31,8 +32,8 @@ services:
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true"
       - "xpack.license.self_generated.type=basic"
-      - "xpack.security.enabled=true"
-      - "xpack.security.transport.ssl.enabled=true"
+      - "xpack.security.enabled=false"
+      - "xpack.security.transport.ssl.enabled=false"
       - "xpack.watcher.enabled=false"
       - "xpack.graph.enabled=false"
       - "xpack.ml.enabled=false"
@@ -179,6 +180,36 @@ services:
         ipv4_address: 172.24.0.54
     volumes:
       - ${PROMETHEUS_CONF_LOCATION}:/etc/prometheus:ro
+
+  promnginxexporter:
+    image: nginx/nginx-prometheus-exporter:0.11.0
+    restart: unless-stopped
+    command:
+      - '-nginx.scrape-uri=http://172.24.0.2:8080/stub_status'
+    networks:
+      external_network:
+      internal_network:
+        ipv4_address: 172.24.0.55
+
+  prompostgresexporter:
+    image: quay.io/prometheuscommunity/postgres-exporter:v0.11.1
+    restart: unless-stopped
+    environment:
+      - DATA_SOURCE_NAME=postgresql://postgres:pgPasswordForInternalUseOnly243247-t@db:5432/postgres?sslmode=disable
+    networks:
+      external_network:
+      internal_network:
+        ipv4_address: 172.24.0.56
+
+  promredisexporter:
+    image: oliver006/redis_exporter:v1.45.0
+    restart: unless-stopped
+    command:
+      - '--redis.addr=redis:6379'
+    networks:
+      external_network:
+      internal_network:
+        ipv4_address: 172.24.0.57
 
 networks:
   external_network:
