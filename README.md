@@ -51,9 +51,9 @@ docker compose up -d
 ```
 You will need to wait a bit for Mastodon to come up before continuing. You can monitor that using `docker compose logs`.
 
-7. Create your admin user: _(replace `tootadmin` and `tootadmin@example.com` with your preferred choices)_
+7. Create your admin user: _(replace `tootadmin` and `tootadmin@www.example.com` with your preferred choices)_
 ```bash
-./tootctl.sh accounts create tootadmin --email tootadmin@example.com --confirmed --role admin
+./tootctl.sh accounts create tootadmin --email tootadmin@www.example.com --confirmed --role Owner
 ```
 This command will output your new temporary password after creating the user. You can change it after logging in to the web UI.
 
