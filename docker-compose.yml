@@ -130,6 +130,22 @@ services:
       - ${NGINX_DATA_LOCATION}:/nginx-data:ro
       - ${NGINX_DATA_LOCATION}/default.conf:/etc/nginx/conf.d/default.conf:ro
 
+  libretranslate:
+    profiles: [libretranslate]
+    image: localhost/mastodocker/libretranslate:latest
+    build:
+      context: .
+      dockerfile: libretranslate.dockerfile
+      args:
+        # The following is a hash pointing to a LibreTranslate GitHub commit:
+        - GIT_CHECKOUT=7c5d798fd55acb092c123a97fc0d8e2644a0de4e
+    init: true
+    restart: unless-stopped
+    networks:
+      external_network:
+      internal_network:
+        ipv4_address: 172.24.0.14
+
   prometheus:
     image: quay.io/prometheus/prometheus:v2.40.5
     restart: unless-stopped
