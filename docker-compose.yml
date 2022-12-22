@@ -162,6 +162,8 @@ services:
   grafana:
     image: grafana/grafana-oss:9.3.1-ubuntu
     restart: unless-stopped
+    environment:
+      - "GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/json/node.json"
     networks:
       external_network:
       internal_network:
@@ -170,6 +172,7 @@ services:
       - 9191:3000
     volumes:
       - grafana_data:/var/lib/grafana
+      - ${GRAFANA_PROVISIONING_LOCATION}:/etc/grafana/provisioning:ro
 
   promnodeexporter:
     image: quay.io/prometheus/node-exporter:v1.5.0
