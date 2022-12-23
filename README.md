@@ -24,35 +24,39 @@ git clone https://github.com/arktronic/mastodocker.git
 cd mastodocker
 ```
 
-2. Run the initial setup script:
+2. Configure your directory structure
+
+Copy `env.example` to `.env` and then edit the `.env` file using your favorite text editor. Change any directory locations for data storage as needed. Configuration locations should be fine to leave as-is.
+
+3. Run the initial setup script:
 ```bash
 ./initial-setup.sh
 ```
 This will create directories and copy `env.production.example` to `.env.production`. If you see a warning about vm.max_map_count, please go to the provided link and follow the directions there to fix the issue before continuing. You can re-run this script afterward to verify that the issue is fixed.
 
-3. Set up new secrets:
+4. Set up new secrets:
 ```bash
 ./reset-secrets.sh
 ```
 
-4. Edit `.env.production` using your favorite text editor and change/fill the variables in it.
+5. Edit `.env.production` using your favorite text editor and change/fill the variables in it.
     - `LOCAL_DOMAIN` **must** be correct - nothing will work otherwise
     - `SINGLE_USER_MODE` can be changed at any time; you can set it to `false` later if you decide to allow people to join in
     - `SMTP_*` values should reflect your SMTP server settings
 
-5. Initialize the database and MinIO:
+6. Initialize the database and MinIO:
 ```bash
 ./db-initialize.sh
 ./minio-initialize.sh
 ```
 
-6. Launch it all:
+7. Launch it all:
 ```bash
 docker compose up -d
 ```
 You will need to wait a bit for Mastodon to come up before continuing. You can monitor that using `docker compose logs`.
 
-7. Create your admin user: _(replace `tootadmin` and `tootadmin@www.example.com` with your preferred choices)_
+8. Create your admin user: _(replace `tootadmin` and `tootadmin@www.example.com` with your preferred choices)_
 ```bash
 ./tootctl.sh accounts create tootadmin --email tootadmin@www.example.com --confirmed --role Owner
 ```
