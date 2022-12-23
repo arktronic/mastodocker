@@ -40,9 +40,10 @@ This will create directories and copy `env.production.example` to `.env.producti
     - `SINGLE_USER_MODE` can be changed at any time; you can set it to `false` later if you decide to allow people to join in
     - `SMTP_*` values should reflect your SMTP server settings
 
-5. Initialize the database:
+5. Initialize the database and MinIO:
 ```bash
 ./db-initialize.sh
+./minio-initialize.sh
 ```
 
 6. Launch it all:
