@@ -13,6 +13,8 @@ echo Getting secret 4...
 SECRET4=$(openssl rand -hex 32)
 echo Getting secret 5...
 SECRET5=$(openssl rand -hex 32)
+echo Getting secret 6...
+SECRET6=$(openssl rand -hex 32)
 echo Getting secret keypair....
 VAPID_LINES=$(docker compose run --rm mastohelper bundle exec rake mastodon:webpush:generate_vapid_key)
 
@@ -26,5 +28,6 @@ sed -i "/^VAPID_KEY_TMP_DELETEME=.*$/d" .env.production
 sed -i "s/^POSTGRES_PASSWORD=.*$/POSTGRES_PASSWORD=$SECRET3/g" .env
 sed -i "s/^ELASTICSEARCH_PASSWORD=.*$/ELASTICSEARCH_PASSWORD=$SECRET4/g" .env
 sed -i "s/^MINIO_ADMIN_PASSWORD=.*$/MINIO_ADMIN_PASSWORD=$SECRET5/g" .env
+sed -i "s/^MINIO_USER_PASSWORD=.*$/MINIO_USER_PASSWORD=$SECRET6/g" .env
 
 echo OK

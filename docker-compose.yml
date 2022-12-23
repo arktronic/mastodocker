@@ -154,6 +154,25 @@ services:
     volumes:
       - ${MINIO_DATA_LOCATION}:/data
 
+  minio-mc:
+    profiles: [minio-mc-do-not-use-directly]
+    image: quay.io/minio/mc:RELEASE.2022-12-13T00-23-28Z
+    restart: "no"
+    networks:
+      external_network:
+    volumes:
+      - minio_mc_data:/root/.mc
+      - ${MINIO_CONF_LOCATION}:/minio-conf:ro
+
+  minio-aws:
+    profiles: [minio-aws-do-not-use-directly]
+    image: amazon/aws-cli:2.9.9
+    restart: "no"
+    networks:
+      external_network:
+    volumes:
+      - minio_aws_data:/root/.aws
+
   nginx:
     image: nginx:stable
     restart: unless-stopped
@@ -281,3 +300,5 @@ networks:
 volumes:
   prometheus_data:
   grafana_data:
+  minio_mc_data:
+  minio_aws_data:
