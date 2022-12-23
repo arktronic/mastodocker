@@ -2,6 +2,7 @@ elasticsearch/
 redis/
 public/
 postgres/
-nginx-data/
+nginx-conf/
+minio/
 .env
 .env.production

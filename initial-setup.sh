@@ -21,7 +21,8 @@ sudo chown -R 70:70 $POSTGRES_DATA_LOCATION
 sudo mkdir -p $REDIS_DATA_LOCATION
 sudo chown -R 999 $REDIS_DATA_LOCATION
 
-sudo mkdir -p $NGINX_DATA_LOCATION
+sudo mkdir -p $NGINX_CONF_LOCATION
+sudo mkdir -p $MINIO_DATA_LOCATION
 
 [ -f ./.env.production ] || cp ./env.production.example ./.env.production
 
