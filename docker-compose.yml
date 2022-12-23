@@ -67,6 +67,7 @@ services:
     environment:
       - DB_PASS=${POSTGRES_PASSWORD}
       - ES_PASS=${ELASTICSEARCH_PASSWORD}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_USER_PASSWORD}
     command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
     networks:
       external_network:
@@ -92,6 +93,7 @@ services:
     environment:
       - DB_PASS=${POSTGRES_PASSWORD}
       - ES_PASS=${ELASTICSEARCH_PASSWORD}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_USER_PASSWORD}
     command: node ./streaming
     networks:
       external_network:
@@ -114,6 +116,7 @@ services:
     environment:
       - DB_PASS=${POSTGRES_PASSWORD}
       - ES_PASS=${ELASTICSEARCH_PASSWORD}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_USER_PASSWORD}
     command: bundle exec sidekiq
     depends_on:
       - db
@@ -158,6 +161,8 @@ services:
     profiles: [minio-mc-do-not-use-directly]
     image: quay.io/minio/mc:RELEASE.2022-12-13T00-23-28Z
     restart: "no"
+    depends_on:
+      - minio
     networks:
       external_network:
     volumes:
@@ -168,6 +173,8 @@ services:
     profiles: [minio-aws-do-not-use-directly]
     image: amazon/aws-cli:2.9.9
     restart: "no"
+    depends_on:
+      - minio
     networks:
       external_network:
     volumes:
